@@ -1,0 +1,89 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Poppins', 'Cairo', sans-serif;
+  background: #0a0a0a;
+}
+
+/* ========== تنسيق السكرول باللون الأحمر ========== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #1a1a1a;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+/* ========== تحديد النص ========== */
+::selection {
+  background: rgba(220, 38, 38, 0.3);
+  color: #ef4444;
+}
+
+/* ========== الروابط ========== */
+a {
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+/* ========== الصور ========== */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========== أزرار عامة ========== */
+button {
+  cursor: pointer;
+  font-family: inherit;
+}
+
+/* ========== عناوين السكشن ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Montserrat', 'Cairo', sans-serif;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+/* ========== نصوص عامة ========== */
+p, span, li, a, div {
+  font-family: 'Poppins', 'Cairo', sans-serif;
+}
+
+/* ========== تنسيق Responsive للـ sections ========== */
+@media (max-width: 768px) {
+  section {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+}
+
+/* ========== تأثيرات إضافية ========== */
+.fade-in {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
