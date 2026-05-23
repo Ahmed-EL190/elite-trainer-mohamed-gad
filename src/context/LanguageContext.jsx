@@ -104,7 +104,7 @@ export const translations = {
     hero: {
       title: 'حوّل جسمك',
       subtitle: 'غيّر حياتك',
-      description: 'مدرب شخصي معتمد | شهادة NASM | خبرة أكثر من 4 سنوات',
+      description: 'مدرب شخصي معتمد | شهادة NASM | خبرة أكثر من 6 سنوات',
       cta: 'ابدأ رحلتك',
       cta2: 'اعرف أكثر',
     },
