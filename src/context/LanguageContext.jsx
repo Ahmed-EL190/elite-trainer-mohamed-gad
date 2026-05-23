@@ -16,7 +16,7 @@ export const translations = {
     hero: {
       title: 'Transform Your Body',
       subtitle: 'Transform Your Life',
-      description: 'Certified Personal Trainer | NASM Certified | 4+ Years Experience',
+      description: 'Certified Personal Trainer | NASM Certified | 6+ Years Experience',
       cta: 'Start Your Journey',
       cta2: 'Learn More',
     },
