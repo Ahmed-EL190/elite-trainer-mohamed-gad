@@ -14,37 +14,81 @@ function useVisible() {
 
 const VIDEOS = [
   {
-    id: 'dQw4w9WgXcQ',
-    titleEn: 'Squat Technique Masterclass',
-    titleAr: 'درس احترافي في تقنية القرفصاء',
+    src: '/video1.mp4',
+    titleEn: 'Introduction Video',
+    titleAr: 'فيديو تعريفي',
   },
   {
-    id: 'L_jWHffIx5E',
-    titleEn: 'Full Body Workout Session',
-    titleAr: 'جلسة تمرين كامل للجسم',
-  },
-  {
-    id: 'aTgRSRgMCng',
-    titleEn: 'Deadlift Form Guide',
-    titleAr: 'دليل أداء رفعة الميت',
+    src: '/video2.mp4',
+    titleEn: 'Workout Compilation',
+    titleAr: 'مجموعة تمارين متنوعة',
   },
 ];
 
 export default function Videos() {
   const { lang, t } = useLang();
-  const [ref, visible] = useVisible();
+  const [sectionRef, visible] = useVisible();
+  const [playingVideo, setPlayingVideo] = useState(null);
+  const videoRefs = useRef({});
+  const sectionRefForObserver = useRef(null);
+  
   const ff = lang === 'ar' ? 'Cairo, sans-serif' : 'Poppins, sans-serif';
   const textColor = '#ffffff';
   const primaryColor = '#dc2626';
 
+  // مراقبة إذا كان السيكشن visible أم لا
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          Object.values(videoRefs.current).forEach(video => {
+            if (video && !video.paused) {
+              video.pause();
+            }
+          });
+          setPlayingVideo(null);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    if (sectionRefForObserver.current) {
+      observer.observe(sectionRefForObserver.current);
+    }
+
+    return () => {
+      if (sectionRefForObserver.current) {
+        observer.unobserve(sectionRefForObserver.current);
+      }
+    };
+  }, []);
+
+  const handlePlay = (index) => {
+    if (playingVideo !== null && playingVideo !== index) {
+      const otherVideo = videoRefs.current[playingVideo];
+      if (otherVideo) {
+        otherVideo.pause();
+      }
+    }
+    setPlayingVideo(index);
+  };
+
+  const handlePause = () => {
+    setPlayingVideo(null);
+  };
+
   return (
-    <section id="videos" style={{
-      padding: '80px 24px',
-      background: '#0a0a0a',
-      direction: t.dir,
-    }}>
-      <div ref={ref} style={{ maxWidth: 1200, margin: '0 auto' }}>
-        {/* Section Header - نفس تصميم باقي السكشنات */}
+    <section 
+      ref={sectionRefForObserver}
+      id="videos" 
+      style={{
+        padding: '80px 24px',
+        background: '#0a0a0a',
+        direction: t.dir,
+      }}
+    >
+      <div ref={sectionRef} style={{ maxWidth: 900, margin: '0 auto' }}>
+        {/* Section Header */}
         <div style={{ 
           textAlign: 'center', 
           marginBottom: 60, 
@@ -75,18 +119,19 @@ export default function Videos() {
               fontWeight: 600,
               color: primaryColor,
               letterSpacing: 1,
-            }}>✦ {t.videos.subtitle}</span>
+            }}>✦ {t.videos.subtitle || 'See Me In Action'}</span>
           </div>
+          
           <h2 style={{ 
-            fontFamily: lang === 'ar' ? 'Cairo, sans-serif' : 'Montserrat, sans-serif', 
-            fontSize: 'clamp(36px, 6vw, 56px)', 
-            margin: 0, 
-            color: textColor, 
-            letterSpacing: lang === 'ar' ? 0 : 2,
-            fontWeight: 700,
-          }}>
-            {t.videos.title}
-          </h2>
+  fontFamily: lang === 'ar' ? 'Cairo, sans-serif' : 'Montserrat, sans-serif', 
+  fontSize: 'clamp(32px, 5vw, 48px)', 
+  margin: 0, 
+  color: textColor, 
+  letterSpacing: lang === 'ar' ? 0 : 1,
+  fontWeight: 700,
+}}>
+  {t.videos.title}
+</h2>
           <div style={{
             width: 60,
             height: 3,
@@ -96,44 +141,73 @@ export default function Videos() {
           }} />
         </div>
 
-        {/* Videos Grid */}
+        {/* Videos - عمود واحد تحت بعض */}
         <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', 
-          gap: 32 
+          display: 'flex', 
+          flexDirection: 'column',
+          gap: 48 
         }}>
           {VIDEOS.map((v, i) => (
-            <div key={i} style={{
-              borderRadius: 20,
-              overflow: 'hidden',
-              border: `1px solid rgba(220,38,38,0.12)`,
-              opacity: visible ? 1 : 0,
-              transform: visible ? 'none' : 'translateY(40px)',
-              transition: `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${i * 0.1}s`,
-              boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-              background: 'rgba(255,255,255,0.03)',
-            }}
+            <div 
+              key={i} 
+              style={{
+                borderRadius: 20,
+                overflow: 'hidden',
+                border: `1px solid rgba(220,38,38,0.12)`,
+                opacity: visible ? 1 : 0,
+                transform: visible ? 'none' : 'translateY(40px)',
+                transition: `all 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${i * 0.2}s`,
+                boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+                background: 'rgba(255,255,255,0.03)',
+              }}
               onMouseEnter={e => { 
                 e.currentTarget.style.transform = 'translateY(-8px)'; 
-                e.currentTarget.style.boxShadow = `0 20px 40px rgba(220,38,38,0.15)`; 
-                e.currentTarget.style.borderColor = `rgba(220,38,38,0.4)`; 
+                e.currentTarget.style.boxShadow = `0 20px 40px rgba(220,38,38,0.35)`; 
+                e.currentTarget.style.borderColor = `rgba(220,38,38,0.8)`;
+                const videoContainer = e.currentTarget.querySelector('.video-container');
+                if (videoContainer) {
+                  videoContainer.style.filter = 'brightness(1.2) drop-shadow(0 0 15px rgba(220,38,38,0.6))';
+                  videoContainer.style.transition = 'all 0.3s ease';
+                }
               }}
               onMouseLeave={e => { 
                 e.currentTarget.style.transform = 'none'; 
                 e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)'; 
-                e.currentTarget.style.borderColor = `rgba(220,38,38,0.12)`; 
+                e.currentTarget.style.borderColor = `rgba(220,38,38,0.12)`;
+                const videoContainer = e.currentTarget.querySelector('.video-container');
+                if (videoContainer) {
+                  videoContainer.style.filter = 'brightness(1)';
+                }
               }}
             >
-              {/* Video Thumbnail / Iframe */}
-              <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0, background: '#1a1a1a' }}>
-                <iframe
-                  src={`https://www.youtube.com/embed/${v.id}`}
-                  title={lang === 'ar' ? v.titleAr : v.titleEn}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}
-                />
+              {/* Video Player */}
+              <div className="video-container" style={{ 
+                position: 'relative', 
+                background: '#000',
+                transition: 'all 0.3s ease',
+              }}>
+                <video
+                  ref={el => videoRefs.current[i] = el}
+                  controls
+                  width="100%"
+                  height="auto"
+                  onPlay={() => handlePlay(i)}
+                  onPause={handlePause}
+                  onEnded={handlePause}
+                  style={{ 
+                    display: 'block',
+                    width: '100%',
+                    height: 'auto',
+                    maxHeight: '500px',
+                    objectFit: 'contain',
+                    background: '#000'
+                  }}
+                  controlsList="nodownload"
+                  preload="metadata"
+                >
+                  <source src={v.src} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
               
               {/* Video Info */}
@@ -143,7 +217,7 @@ export default function Videos() {
               }}>
                 <div style={{ 
                   fontFamily: ff, 
-                  fontSize: 15, 
+                  fontSize: 18, 
                   fontWeight: 700, 
                   color: textColor,
                   marginBottom: 8,
@@ -165,10 +239,12 @@ export default function Videos() {
                     alignItems: 'center',
                     justifyContent: 'center',
                     fontSize: 12,
-                  }}>🏋️</div>
+                  }}>
+                    {i === 0 ? '🎬' : '💪'}
+                  </div>
                   <div style={{ 
                     fontFamily: ff, 
-                    fontSize: 12, 
+                    fontSize: 13, 
                     color: primaryColor, 
                     fontWeight: 600,
                     letterSpacing: 0.5,
@@ -193,6 +269,40 @@ export default function Videos() {
               opacity: 0.6;
               transform: scale(1.1);
             }
+          }
+          
+          /* تنسيق عناصر التحكم في الفيديو */
+          video::-webkit-media-controls {
+            background-color: rgba(0,0,0,0.8);
+          }
+          
+          video::-webkit-media-controls-play-button {
+            background-color: #dc2626;
+            border-radius: 50%;
+          }
+          
+          video::-webkit-media-controls-play-button:hover {
+            background-color: #ef4444;
+            transform: scale(1.1);
+          }
+          
+          /* تحسين ظهور الفيديو */
+          .video-container {
+            background: #000;
+            position: relative;
+          }
+          
+          /* إضافة توهج خفيف حول الفيديو */
+          .video-container::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none;
+            box-shadow: inset 0 0 50px rgba(220,38,38,0.1);
+            border-radius: 20px;
           }
         `}
       </style>

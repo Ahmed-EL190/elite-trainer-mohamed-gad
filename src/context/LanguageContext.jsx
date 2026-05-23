@@ -65,9 +65,9 @@ export const translations = {
       ],
     },
     videos: {
-      title: 'Training Videos',
-      subtitle: 'See Me In Action',
-    },
+  title: '🎬 Intro About me & 💪 Workout Compilation',
+  subtitle: 'See Me In Action',
+},
     contact: {
       title: 'Get In Touch',
       subtitle: "Ready to Start? Let's Talk!",
@@ -153,9 +153,9 @@ export const translations = {
       ],
     },
     videos: {
-      title: 'فيديوهات التدريب',
-      subtitle: 'شاهدني أثناء العمل',
-    },
+  title: '🎬 فديو تعريفي و 💪 مجموعة تمارين',
+  subtitle: 'شاهدني أثناء العمل',
+},
     contact: {
       title: 'تواصل معي',
       subtitle: 'مستعد للبدء؟ لنتحدث!',
