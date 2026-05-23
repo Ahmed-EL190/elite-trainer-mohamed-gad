@@ -23,7 +23,7 @@ export const translations = {
     about: {
       title: 'About Me',
       subtitle: 'Your Dedicated Fitness Partner',
-      description: "I am an Egyptian Certified Personal Trainer from NASM, with 4 years in the fitness industry. As a CPT, I'm committed to delivering satisfaction in every session through personalized training programs tailored to your goals.",
+      description: "I am an Egyptian Certified Personal Trainer from NASM, with 6 years in the fitness industry. As a CPT, I'm committed to delivering satisfaction in every session through personalized training programs tailored to your goals.",
       stats: [
         { value: '6+', label: 'Years Experience' },
         { value: '100+', label: 'Happy Clients' },
