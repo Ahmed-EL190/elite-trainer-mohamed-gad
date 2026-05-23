@@ -25,7 +25,7 @@ export const translations = {
       subtitle: 'Your Dedicated Fitness Partner',
       description: "I am an Egyptian Certified Personal Trainer from NASM, with 4 years in the fitness industry. As a CPT, I'm committed to delivering satisfaction in every session through personalized training programs tailored to your goals.",
       stats: [
-        { value: '4+', label: 'Years Experience' },
+        { value: '6+', label: 'Years Experience' },
         { value: '100+', label: 'Happy Clients' },
         { value: 'NASM', label: 'Certified' },
         { value: '3+', label: 'Gyms Worked' },
@@ -77,6 +77,15 @@ export const translations = {
       locationVal: 'Saudi Arabia',
       whatsapp: 'Chat on WhatsApp',
       skills: ['Effective Motivator', 'Client Relationship Management', 'Correct Movement & Performance', 'English & Arabic Speaker'],
+    },
+    // NEW: Combined Section Translations
+    combined: {
+      badge: 'My Journey',
+      title: 'Certifications & Experience',
+      showCertifications: 'Show Certifications',
+      hideCertifications: 'Hide Certifications',
+      showExperience: 'Show Experience',
+      hideExperience: 'Hide Experience',
     },
     footer: {
       rights: 'All rights reserved.',
@@ -156,6 +165,15 @@ export const translations = {
       locationVal: 'المملكة العربية السعودية',
       whatsapp: 'تحدث عبر واتساب',
       skills: ['محفز فعّال', 'إدارة علاقات العملاء', 'الحركة والأداء الصحيح', 'متحدث بالعربية والإنجليزية'],
+    },
+    // NEW: Combined Section Translations
+    combined: {
+      badge: 'إنجازاتي',
+      title: 'الشهادات والخبرات',
+      showCertifications: 'عرض الشهادات',
+      hideCertifications: 'إخفاء الشهادات',
+      showExperience: 'عرض الخبرات',
+      hideExperience: 'إخفاء الخبرات',
     },
     footer: {
       rights: 'جميع الحقوق محفوظة.',

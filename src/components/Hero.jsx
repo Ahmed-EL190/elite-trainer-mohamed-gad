@@ -249,7 +249,7 @@ export default function Hero() {
               borderTop: '1px solid rgba(255,255,255,0.08)',
             }}>
               <div style={{ textAlign: 'center' }}>
-                <div style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 700, color: primaryColor }}>4+</div>
+                <div style={{ fontFamily: 'Montserrat, sans-serif', fontSize: 'clamp(24px, 5vw, 32px)', fontWeight: 700, color: primaryColor }}>6+</div>
                 <div style={{ fontFamily: 'Poppins, sans-serif', fontSize: 10, color: 'rgba(255,255,255,0.5)' }}>Years Experience</div>
               </div>
               <div style={{ textAlign: 'center' }}>

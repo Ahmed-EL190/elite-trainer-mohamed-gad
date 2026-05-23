@@ -24,13 +24,13 @@ export default function Navbar() {
   }, [menuOpen]);
 
   const navLinks = [
-    { href: '#home', label: t.nav.home },
-    { href: '#about', label: t.nav.about },
-    { href: '#services', label: t.nav.services },
-    { href: '#experience', label: t.nav.certifications },
-    { href: '#videos', label: t.nav.videos },
-    { href: '#contact', label: t.nav.contact },
-  ];
+  { href: '#home', label: t.nav.home, icon: '🏠' },
+  { href: '#about', label: t.nav.about, icon: '👤' },
+  { href: '#services', label: t.nav.services, icon: '💪' },
+  { href: '#combined', label: t.nav.certifications, icon: '📜' },  // هنا التغيير
+  { href: '#videos', label: t.nav.videos, icon: '🎥' },
+  { href: '#contact', label: t.nav.contact, icon: '📞' },
+];
 
   const primaryColor = '#dc2626';
   const primaryDark = '#991b1b';
@@ -69,7 +69,7 @@ export default function Navbar() {
             direction: t.dir,
           }}
         >
-          {/* Logo جديد للجيم */}
+          {/* Logo */}
           <a
             href="#home"
             style={{
@@ -80,7 +80,6 @@ export default function Navbar() {
               flexShrink: 0,
             }}
           >
-            {/* أيقونة الجيم */}
             <div
               style={{
                 width: 42,
@@ -106,7 +105,6 @@ export default function Navbar() {
               }}>⭐</span>
             </div>
             
-            {/* الاسم الجديد */}
             <div style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
               <span
                 style={{
@@ -133,38 +131,44 @@ export default function Navbar() {
             </div>
           </a>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Navigation - أيقونات زي الصورة */}
           <div className="desktop-nav" style={{ 
             display: 'flex', 
             alignItems: 'center', 
-            gap: 6,
+            gap: 8,
           }}>
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 style={{
-                  padding: '6px 14px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  padding: '6px 16px',
                   borderRadius: 40,
                   fontFamily: lang === 'ar' ? "'Cairo', sans-serif" : "'Poppins', sans-serif",
-                  fontSize: 13,
+                  fontSize: 11,
                   fontWeight: 500,
                   color: '#e0e0e0',
                   textDecoration: 'none',
                   transition: 'all 0.25s ease',
                   letterSpacing: lang === 'ar' ? 0 : 0.3,
                   whiteSpace: 'nowrap',
+                  gap: 4,
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.color = primaryColor;
-                  e.target.style.background = 'rgba(220, 38, 38, 0.1)';
+                  e.currentTarget.style.color = primaryColor;
+                  e.currentTarget.style.transform = 'translateY(-2px)';
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.color = '#e0e0e0';
-                  e.target.style.background = 'transparent';
+                  e.currentTarget.style.color = '#e0e0e0';
+                  e.currentTarget.style.transform = 'translateY(0)';
                 }}
               >
-                {link.label}
+                <span style={{ fontSize: 20, marginBottom: 2 }}>{link.icon}</span>
+                <span>{link.label}</span>
               </a>
             ))}
           </div>
@@ -331,7 +335,7 @@ export default function Navbar() {
             padding: '2rem',
             direction: t.dir,
           }}>
-            {/* لوجو في منتصف القائمة على الموبايل */}
+            {/* Logo in mobile menu */}
             <div style={{
               display: 'flex',
               flexDirection: 'column',
@@ -388,6 +392,10 @@ export default function Navbar() {
                 href={link.href}
                 onClick={() => setMenuOpen(false)}
                 style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 12,
                   padding: '12px 28px',
                   borderRadius: 50,
                   fontFamily: lang === 'ar' ? "'Cairo', sans-serif" : "'Poppins', sans-serif",
@@ -406,17 +414,18 @@ export default function Navbar() {
                   transform: 'translateY(20px)',
                 }}
                 onMouseEnter={(e) => {
-                  e.target.style.background = 'rgba(220,38,38,0.15)';
-                  e.target.style.borderColor = primaryColor;
-                  e.target.style.color = primaryColor;
+                  e.currentTarget.style.background = 'rgba(220,38,38,0.15)';
+                  e.currentTarget.style.borderColor = primaryColor;
+                  e.currentTarget.style.color = primaryColor;
                 }}
                 onMouseLeave={(e) => {
-                  e.target.style.background = 'rgba(255, 255, 255, 0.03)';
-                  e.target.style.borderColor = 'rgba(220, 38, 38, 0.1)';
-                  e.target.style.color = '#e0e0e0';
+                  e.currentTarget.style.background = 'rgba(255, 255, 255, 0.03)';
+                  e.currentTarget.style.borderColor = 'rgba(220, 38, 38, 0.1)';
+                  e.currentTarget.style.color = '#e0e0e0';
                 }}
               >
-                {link.label}
+                <span style={{ fontSize: 22 }}>{link.icon}</span>
+                <span>{link.label}</span>
               </a>
             ))}
           </div>
